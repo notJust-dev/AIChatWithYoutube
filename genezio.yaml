@@ -23,4 +23,4 @@ frontend:
     deploy: npm run build
   environment:
     VITE_API_URL: ${{ backend.functions.api.url }}
-  subdomain: scarlet-western-moth
+  # subdomain: scarlet-western-moth
