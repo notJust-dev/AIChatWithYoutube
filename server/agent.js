@@ -39,27 +39,8 @@ const llm = new ChatAnthropic({
 
 const checkpointer = new MemorySaver();
 
-const agent = createReactAgent({
+export const agent = createReactAgent({
   llm,
   tools: [retrieveTool],
   checkpointer,
 });
-
-// testing the agent
-const video_id = 'Pxn276cWKeI';
-
-console.log('Q1: What will people learn from this video?');
-const results = await agent.invoke(
-  {
-    messages: [
-      {
-        role: 'user',
-        content:
-          'What will people learn from the video based on its transcript?',
-      },
-    ],
-  },
-  { configurable: { thread_id: 1, video_id } }
-);
-
-console.log(results.messages.at(-1)?.content);
