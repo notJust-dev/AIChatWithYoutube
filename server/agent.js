@@ -7,17 +7,15 @@ import { MemorySaver } from '@langchain/langgraph';
 import { vectorStore, addYTVideoToVectorStore } from './embeddings.js';
 import data from './data.js';
 
-await addYTVideoToVectorStore(data[0]);
-await addYTVideoToVectorStore(data[1]);
+// await addYTVideoToVectorStore(data[0]);
+// await addYTVideoToVectorStore(data[1]);
 
 // retrieveal tool
 const retrieveTool = tool(
   async ({ query }, { configurable: { video_id } }) => {
-    const retrievedDocs = await vectorStore.similaritySearch(
-      query,
-      3,
-      (doc) => doc.metadata.video_id === video_id
-    );
+    const retrievedDocs = await vectorStore.similaritySearch(query, 3, {
+      video_id,
+    });
 
     const serializedDocs = retrievedDocs
       .map((doc) => doc.pageContent)
